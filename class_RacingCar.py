@@ -18,7 +18,9 @@ car3 = RacingCar('자동차3')
 car1.runCar()
 car2.runCar()
 car3.runCar()
-'''
+
+print("---------------------------------------------------------------")
+
 import threading
 import time
 
@@ -30,8 +32,8 @@ th1.start()
 th2.start()
 th3.start()
 
-print()
-'''
+print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+
 import multiprocessing
 import time
 
