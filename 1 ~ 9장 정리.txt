@@ -270,9 +270,21 @@ from tkinter import*
 window = Tk()
 window.mainloop()
 
+<tkinter 불러오는 방법>
+from tkinter import*
+window = Tk()
+또는
+import tkinter as tk
+window = tk.Tk()
+
+
+
+
 Tk도 클래스의 일종이다.
 
 Label() : 문자를 표현할 수 있는 위젯
 Photoimage() : 레이블 대신에 이미지를 넣을 수 있는 코드
 
 !!!마우스 및 키보드 event 코드!!!
+
+.configure ---> 이거 사용하면 라벨을 변경해 준다(메서드)
