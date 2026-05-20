@@ -75,7 +75,7 @@ class Triangle(Shape):
         a = self.x, self.y + self.size
         b = self.x - self.size, self.y - self.size
         c = self.x + self.size, self.y - self.size
-        canvas.create_polygon(a, b, c, fill = self.color)
+        canvas.create_polygon(a, b, c, fill = self.color, outline = "")
         pass
 
 
