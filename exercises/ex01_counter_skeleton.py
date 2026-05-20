@@ -28,13 +28,15 @@ class Counter:
     def increment(self):
         # TODO: self.value 를 1 증가시키고
         self.value += 1
-        #       Counter.total_clicks 도 1 증가시켜라
+        #Counter.total_clicks 도 1 증가시켜라
+        Counter.total_clicks += 1
         pass
 
     def decrement(self):
         # TODO: self.value 를 1 감소시키고
         self.value -= 1
-        #       Counter.total_clicks 도 1 증가시켜라
+        #Counter.total_clicks 도 1 증가시켜라
+        Counter.total_clicks += 1
         if self.value < 0 :
             self.value = 0
         pass
