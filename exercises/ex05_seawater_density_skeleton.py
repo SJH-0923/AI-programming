@@ -41,12 +41,19 @@ class SeaWater:
         self.T = T
         self.S = S
 
+
+
     def density(self):
         """ρ(S,T,0) [kg/m^3] 반환"""
         T, S = self.T, self.S
         # TODO: 위 공식에 따라 ρ_w, A, B, C 계산
         # TODO: rho = ρ_w + A*S + B*S**1.5 + C*S*S 반환
-        pass
+        ρ_w = 999.842594 + 6.793952e-2*T - 9.095290e-3*T**2 + 1.001685e-4*T**3 - 1.120083e-6*T**4 + 6.536336e-9*T**5
+        A = 8.24493e-1 - 4.0899e-3*T + 7.6438e-5*T**2 - 8.2467e-7*T**3 + 5.3875e-9*T**4
+        B = -5.72466e-3 + 1.0227e-4*T - 1.6546e-6*T**2
+        C = 4.8314e-4
+        rho = ρ_w + A*S + B*S**1.5 + C*S*S
+        return rho
 
     def sigma_t(self):
         """σ_t = ρ - 1000  [kg/m^3]"""

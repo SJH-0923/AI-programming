@@ -46,17 +46,22 @@ class CTD:
                 if not row:
                     continue
                 # TODO: row[0]→depth, row[1]→temperature, row[2]→salinity
+                depth.append(float.row[0])
+                temp.append(float.row[1])
+                sal.append(float.row[2])
                 # TODO: float 로 변환해서 리스트에 append
                 pass
         return cls(depth, temp, sal, name=path.split("/")[-1])
 
     def avg_T(self):
         # TODO: 수온 평균. 데이터가 없으면 0 반환
-        pass
+        return sum(self.temperature) / len(self.temperature)
+        if not self.temperature :
+            return 0
 
     def avg_S(self):
         # TODO: 염분 평균
-        pass
+        return sum(self.salinity) / len(self.salinity)
 
     def max_depth(self):
         return max(self.depth) if self.depth else 0.0

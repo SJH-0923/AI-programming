@@ -21,7 +21,13 @@ class Shape:
     """슈퍼 클래스: 추상 메서드 draw() 만 정의"""
     def __init__(self, canvas, x, y, color=None):
         # TODO: 인자 저장 (self.canvas, self.x, self.y)
+        self.canvas = canvas
+        self.x = x
+        self.y = y
+        self.color = color
         # TODO: color 가 None 이면 무작위 색 (예: random_color()) 사용
+        if color == None :
+            color =  random_color()
         pass
 
     def draw(self):
@@ -42,6 +48,7 @@ class Circle(Shape):
 
     def draw(self):
         # TODO: canvas.create_oval(x-r, y-r, x+r, y+r, fill=self.color) 호출
+        canvas.create_oval(self.x-self.r, self.y-self.r, self.x+self.r, self.y+self.r, fill = self.color)
         pass
 
 
@@ -53,6 +60,7 @@ class Rectangle(Shape):
 
     def draw(self):
         # TODO: canvas.create_rectangle(...) 호출
+        canvas.create_rectangle(self.x, self.y, self.w, self.h, fill = self.color)
         pass
 
 
@@ -64,6 +72,10 @@ class Triangle(Shape):
     def draw(self):
         # TODO: 세 꼭짓점 좌표를 만들어 canvas.create_polygon(...) 호출
         # 예: 정삼각형이 (x,y) 를 중심으로 그려지도록
+        a = self.x, self.y + self.size
+        b = self.x - self.size, self.y - self.size
+        c = self.x + self.size, self.y - self.size
+        canvas.create_polygon(a, b, c, fill = self.color)
         pass
 
 

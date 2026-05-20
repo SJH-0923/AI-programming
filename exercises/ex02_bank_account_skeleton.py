@@ -31,18 +31,29 @@ class BankAccount:
 
     def __init__(self, owner, balance=0):
         # TODO: self.owner, self.balance 초기화
+        self.owner = owner
+        self.balance = balance
         # TODO: BankAccount.num_accounts 증가
+        BankAccount.num_accounts += 1
         pass
 
     def deposit(self, amount):
         # TODO: amount <= 0 이면 ValueError 발생 (메시지: "입금액은 양수여야 합니다")
+        if amount <= 0 :
+            raise ValueError("입금액은 양수여야 합니다.")
         # TODO: self.balance 증가
+        self.balance += amount
         pass
 
     def withdraw(self, amount):
         # TODO: amount <= 0 이면 ValueError 발생
+        if amount <= 0 :
+            raise ValueError("출금 금액은 0보다 커야 합니다.")
         # TODO: 잔액 부족이면 ValueError 발생
+        if amount > self.balance :
+            raise ValueError("잔액이 부족합니다.")
         # TODO: self.balance 감소
+        self.balance -= amount
         pass
 
     def get_balance(self):
@@ -54,6 +65,13 @@ def parse_amount():
     """Entry 에서 정수를 안전하게 꺼낸다. 실패 시 None 반환."""
     text = entry.get().strip()
     # TODO: try/except 로 int 변환, 실패하면 messagebox.showerror 호출 후 None 반환
+    try :
+        amount = int(text)
+        return amount
+
+    except ValueError :
+        messagebox.showerror("입력 오류. 다시 입력하세요.")
+        return None
     pass
 
 
@@ -78,6 +96,15 @@ def on_deposit():
 
 def on_withdraw():
     # TODO: on_deposit 와 같은 패턴으로 작성
+    amount = parse_amount()
+    if amount is None :
+        return
+    try :
+        account.withdraw(amount)
+    except ValueError as e :
+        messagebox.showerror("출금 오류", str(e))
+        return
+    update_label()
     pass
 
 

@@ -30,17 +30,27 @@ class StopWatch:
 
     def start(self):
         # TODO: 이미 running 이면 무시
+        if self.running :
+            return
         # TODO: start_time = time.time(), running = True
+        self.start_time = time.time()
+        self.running = True
         pass
 
     def stop(self):
         # TODO: running 이 False 면 무시
+        if self.running == False :
+            return
         # TODO: elapsed += time.time() - start_time
+        self.elapsed += time.time() - self.start_time
         # TODO: running = False
+        self.running = False
         pass
 
     def reset(self):
         # TODO: running = False, elapsed = 0.0
+        self.running = False
+        self.elapsed = 0.0
         pass
 
     def current(self):
@@ -56,6 +66,7 @@ def update():
     """0.1초마다 자기 자신을 다시 예약해 Label 을 갱신"""
     label.config(text=f"{sw.current():7.2f} 초")
     # TODO: window.after(100, update) 로 자기 자신을 100ms 뒤에 다시 호출
+    window.after(100, update)
     pass
 
 

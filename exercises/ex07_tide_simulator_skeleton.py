@@ -42,7 +42,9 @@ class Constituent:
 
     def eta(self, t):
         # TODO: A * cos(2π*t/T - φ) 반환 (단, enabled 가 False 면 0)
-        pass
+        if not self.enabled :
+            return 0.0
+        return self.A * math.cos(2 * math.pi * t / self.T - self.phi)
 
 
 class Tide:
@@ -53,7 +55,7 @@ class Tide:
 
     def eta(self, t):
         # TODO: 각 분조의 eta(t) 를 더해서 총 조위 반환
-        pass
+        return sum(c.eta(t) for c in self.constituents)
 
     def by_name(self, name):
         for c in self.constituents:
