@@ -277,9 +277,6 @@ window = Tk()
 import tkinter as tk
 window = tk.Tk()
 
-
-
-
 Tk도 클래스의 일종이다.
 
 Label() : 문자를 표현할 수 있는 위젯
