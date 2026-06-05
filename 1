@@ -1,48 +1,29 @@
 from tkinter import *
 from tkinter import messagebox
 import json
-import os
 import random as rd
 
 
-#메뉴 추천
+try:
+    with open("memo.json", "r", encoding="utf-8") as f:
+        memo_data = json.load(f)
+except (FileNotFoundError, json.JSONDecodeError):
+    memo = {}
+
 with open("food.json", "r", encoding="utf=8") as f:
     food_data = json.load(f)
+
+def enter_memo() :
+    memo()
 
 def random_food() :
     a = rd.choice(food_data)
     return a
 
-def food() :
-    food_label2.config(text = f"<{random_food()}>")
-
-
-#메모장
-class Memo_Pad :
-    try:
-        with open("memo.txt", "r", encoding="utf-8") as f:
-            memo_data = f.read()
-    except FileNotFoundError:
-        with open("memo.txt", "w", encoding="utf-8") as f:
-            memo_data = ""
-
-    def write(self) :
-        with open("memo.txt", "w", encoding="utf-8") as f:
-            f.write(memo_data)
-    
-    def memo(self) :
-        memo_window = Toplevel(window)
-        memo_window.title("메모장")
-        memo_window.geometry("300x300")
-
-        text_area = Text(memo_window, wrap=WORD)
-        text_area.pack(expand=True, fill=BOTH, padx=10, pady=10)
-        text_area.insert(END, Memo_Pad.memo_data)
-
-def open_Memo_pad():
-    app = Memo_Pad()
-    return app.memo()
-
+def memo() :
+    memo_window = Toplevel(window)
+    memo_window.title("메모장")
+    memo_window.geometry("300x300")
 
 def todo() :
     pass
@@ -50,6 +31,10 @@ def todo() :
 
 def calender() :
     pass
+
+
+def food() :
+    food_label2.config(text = f"<{random_food()}>")
 
 
 
@@ -73,11 +58,11 @@ photo_memo = photo_memo_original.subsample(5, 5)
 
 #버튼
 button_food = Button(window, text = "!돌리기!", fg = "blue", command = food)
-button_memo = Button(window, image = photo_memo, command = open_Memo_pad)
+button_memo = Button(window, image = photo_memo, command = enter_memo)
 button_quit = Button(window, text = "앱 종료", fg = "red", command = quit)
 
-button_food.pack(pady=10)
-button_memo.pack(pady=10)
-button_quit.pack(pady=10)
+button_food.pack(pady=50)
+button_memo.pack(pady=50)
+button_quit.pack(pady=50)
 
 window.mainloop()

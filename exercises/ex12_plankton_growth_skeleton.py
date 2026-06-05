@@ -37,7 +37,9 @@ class Population:
         """한 시간 스텝 전진 (로지스틱)"""
         # TODO: dN = r*N*(1 - N/K)*dt 계산 후 self.N 갱신
         # TODO: self.history 에 새 N 추가
-        pass
+        dN = self.r * self.N * (1 - self.N / self.K) * self.dt
+        self.N += dN
+        self.history.append(self.N)
 
     def reset(self, N0=5.0):
         self.N = N0

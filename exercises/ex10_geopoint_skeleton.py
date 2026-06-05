@@ -43,17 +43,27 @@ class GeoPoint:
     def distance_to(self, other):
         """other 까지의 대권거리 [km]"""
         # TODO: Haversine 공식으로 거리 계산 후 반환
-        dφ = φ2 − φ1,  dλ = λ2 − λ1
-        a = math.sin(dφ/2)**2 + math.cosφ1·math.cosφ2·math.sin(dλ/2)**2
-        c = 2·a*math.tan2(math.sqrt(a), math.aqrt(1−a))
-        distance = R·c
+        phi1 = math.radians(self.lat)
+        phi2 = math.radians(other.lat)
+        dphi = math.radians(other.lat - self.lat)
+        dlamb = math.radians(other.lon - self.lon)
+        a = math.sin(dphi / 2)**2 + math.cos(phi1) * math.cos(phi2) * math.sin(dlamb / 2)**2
+        c = 2 * a * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+        distance = R_EARTH * c
         
         return distance
 
     def bearing_to(self, other):
         """other 로 향하는 초기 방위각 [deg, 0~360]"""
         # TODO: 위 방위각 공식으로 계산 후 반환
-        pass
+        phi1 = math.radians(self.lat)
+        phi2 = math.radians(other.lat)
+        dlamb = math.radians(other.lon - self.lon)
+        y = math.sin(dlamb) * math.cos(phi2)
+        x = math.cos(phi1) * math.sin(phi2) - math.sin(phi1) * math.cos(phi2) * math.cos(dlamb)
+        bearing = (math.degrees(math.atan2(y, x)) + 360) % 360
+
+        return bearing
 
     def __repr__(self):
         return f"GeoPoint({self.lat}, {self.lon}, {self.name!r})"
